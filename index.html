@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#b8607c" />
+  <title>For Renei, With Love ♥</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Intro splash: tap to enter (starts music) -->
+  <div id="intro" class="intro" role="button" tabindex="0" aria-label="Tap to enter">
+    <div class="intro-inner">
+      <div class="intro-heart">♥</div>
+      <p class="intro-eyebrow">Welcome My Love</p>
+      <h1>Renei</h1>
+      <p class="intro-sub">Something special, just for you…</p>
+      <p class="intro-cta">tap anywhere to begin</p>
+    </div>
+  </div>
+
+  <!-- Background music: drop song1.mp3 … song7.mp3 into /music -->
+  <audio id="music" preload="auto"></audio>
+  <button id="muteBtn" class="mute-toggle hidden" aria-label="Mute music" title="Mute / unmute">♪</button>
+
+  <div class="petals" aria-hidden="true"></div>
+  <div class="burst" id="burst" aria-hidden="true"></div>
+
+  <div class="page" id="page">
+    <header class="hero reveal">
+      <p class="eyebrow">A little gift from me to you</p>
+      <h1>Book Your Massage</h1>
+      <p class="subtitle">An hour (or two) that's all about you, Renei. Pick a treatment, choose a time, and I'll take care of everything else. ♥</p>
+    </header>
+
+    <main>
+      <form id="bookingForm" class="card reveal" novalidate>
+        <!-- progress -->
+        <div class="progress" id="progress">
+          <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+
+        <section class="field">
+          <h2><span class="step-no">1</span> Choose your treatment</h2>
+          <div class="services" id="services"></div>
+        </section>
+
+        <section class="field">
+          <h2><span class="step-no">2</span> Add-ons <span class="muted">(optional)</span></h2>
+          <div class="addons" id="addons"></div>
+        </section>
+
+        <section class="field">
+          <h2><span class="step-no">3</span> The details</h2>
+
+          <div class="grid-2">
+            <label class="lbl">
+              <span>Your name</span>
+              <input type="text" id="name" value="Renei" autocomplete="off" required />
+            </label>
+            <label class="lbl">
+              <span>Pressure</span>
+              <select id="pressure">
+                <option>Gentle &amp; relaxing</option>
+                <option selected>Medium</option>
+                <option>Firm / deep tissue</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid-2">
+            <label class="lbl">
+              <span>Where</span>
+              <select id="location">
+                <option>Cozy on the couch</option>
+                <option selected>Candlelit bedroom</option>
+                <option>By the window</option>
+                <option>Wherever you like ♥</option>
+              </select>
+            </label>
+            <label class="lbl">
+              <span>Occasion</span>
+              <select id="occasion">
+                <option selected>Just because I love you</option>
+                <option>Rough week reset</option>
+                <option>Anniversary</option>
+                <option>Birthday</option>
+                <option>Apology (I'm sorry ♥)</option>
+                <option>Celebration</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid-2">
+            <label class="lbl">
+              <span>Date</span>
+              <input type="date" id="date" required />
+            </label>
+            <label class="lbl">
+              <span>Start time</span>
+              <input type="time" id="time" value="19:00" required />
+            </label>
+          </div>
+
+          <label class="lbl">
+            <span>A note for me <span class="muted">(focus areas, music, mood…)</span></span>
+            <textarea id="notes" rows="3" maxlength="240" placeholder="Please focus on my shoulders and keep it slow…"></textarea>
+            <span class="counter"><span id="counter">0</span>/240</span>
+          </label>
+        </section>
+
+        <!-- what to expect -->
+        <div class="expect">
+          <div class="expect-title">What to expect ♥</div>
+          <ul>
+            <li>Warm towels &amp; aromatherapy oil ready</li>
+            <li>Your playlist softly in the background</li>
+            <li>Zero rush — the time is entirely yours</li>
+          </ul>
+        </div>
+
+        <div class="summary" id="summary">
+          <div class="summary-line"><span>Treatment</span><span id="sumService">—</span></div>
+          <div class="summary-line"><span>Duration</span><span id="sumDuration">—</span></div>
+          <div class="summary-line"><span>Ends around</span><span id="sumEnd">—</span></div>
+          <div class="summary-line"><span>Add-ons</span><span id="sumAddons">None</span></div>
+          <div class="summary-line total"><span>Total</span><span id="sumTotal">0 ♥</span></div>
+        </div>
+
+        <p class="error" id="error" role="alert"></p>
+
+        <button type="submit" class="btn" id="confirmBtn">Confirm Booking ♥</button>
+      </form>
+
+      <section id="confirmation" class="card confirmation hidden">
+        <div class="check">♥</div>
+        <p class="eyebrow">It's official</p>
+        <h2 id="confirmHeading">You're booked, Renei!</h2>
+        <p id="confirmText">Can't wait to pamper you.</p>
+
+        <div class="countdown" id="countdown"></div>
+
+        <div class="ticket" id="ticket"></div>
+
+        <div class="confirm-actions">
+          <button type="button" class="btn" id="downloadBtn">Download Voucher (JPG)</button>
+          <button type="button" class="btn ghost" id="againBtn">Book Another</button>
+        </div>
+        <p class="love-note">P.S. I mean it — this one's all about you. ♥</p>
+      </section>
+    </main>
+
+    <footer class="reveal">
+      <p>Made with ♥ for Renei — I Love you.</p>
+    </footer>
+  </div><!-- /.page -->
+
+  <script src="script.js"></script>
+</body>
+</html>
